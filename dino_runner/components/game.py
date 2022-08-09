@@ -1,5 +1,9 @@
 import pygame
+<<<<<<< HEAD
 from dino_runner.components.dinosaur import Dinosaur
+=======
+from dino_runner.components.Dinosaur import Dinosaur
+>>>>>>> b7fd7ff408950c3410e2e967ca13f0cb1d748ca7
 
 from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS
 
