@@ -43,6 +43,8 @@ class Game:
             self.events()
             self.update()
             self.draw()
+            
+
 
     def events(self):
         for event in pygame.event.get():
@@ -56,12 +58,17 @@ class Game:
         self.player.update(user_input)
         self.obstacle_manager.update(self)
         
-
     def update_score(self):
 
         self.points += 1
         if self.points % 100 == 0:
             self.game_speed += 1
+
+    def show_deaths(self):
+       
+        if self.death_count %100 == 0:
+            self.death_count += 1
+            
 
     def draw(self):
         self.clock.tick(FPS)
@@ -70,6 +77,7 @@ class Game:
         self.player.draw(self.screen)
         self.obstacle_manager.draw(self.screen)
         self.draw_score()
+        
         pygame.display.update()
         pygame.display.flip()
 
@@ -84,7 +92,7 @@ class Game:
 
     def draw_score(self):
         font = pygame.font.Font(FONT_STYLE, 22)
-        text = font.render(f"Points: {self.points}", True, (0,0,0))
+        text = font.render(f"Points: {self.points}", True, (0,0,225))
         text_rect = text.get_rect()
         text_rect.center = (1000, 50)
         self.screen.blit(text, text_rect)
@@ -108,18 +116,41 @@ class Game:
 
         if self.death_count == 0:
             font = pygame.font.Font(FONT_STYLE, 30)
-            text = font.render("Press any key to start", True, (0,0,0))
+            text = font.render("Press any key to start", True, (0,0,225))
             text_rect = text.get_rect()
             text_rect.center = (half_screen_heigth, half_screen_width)
             self.screen.blit(text, text_rect)
             
         elif self.death_count > 0:
-            pass
+            
+            font = pygame.font.Font(FONT_STYLE, 30)
+            text = font.render("Press any key to Restart", True, (227, 38, 54))
+            text_rect = text.get_rect()
+            text_rect.center = (half_screen_heigth, half_screen_width)
+            self.screen.blit(text, text_rect)
+            
+            font = pygame.font.Font(FONT_STYLE, 22)
+            text = font.render(f"Accumulated points: {self.points}", True, (227, 38, 54))
+            text_rect = text.get_rect()
+            text_rect.center = (900, 50)
+            self.screen.blit(text, text_rect)
+            
 
-        
+            font = pygame.font.Font(FONT_STYLE, 22)
+            text = font.render(f"DEATHS: {self.death_count}", True, (227, 38, 54))
+            text_rect = text.get_rect()
+            text_rect.center = (600, 50)
+            self.screen.blit(text, text_rect)
+
 
             self.screen.blit(RUNNING[0], (half_screen_width -20, half_screen_heigth - 140))
 
+        
         pygame.display.update()
-        self.handle_key_events_on_menu()        
+        self.reset_points()
+        self.handle_key_events_on_menu()
+      
 
+    def reset_points(self):
+        pass
+        
