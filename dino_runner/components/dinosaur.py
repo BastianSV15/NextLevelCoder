@@ -5,7 +5,9 @@ from pygame.sprite import Sprite
 class Dinosaur(Sprite):
     X_POS = 80
     Y_POS = 310
+    Y_POS_DUCK = 310
     JUMP_VEL = 8.5
+    
 
     def __init__(self):
         self.image = RUNNING[0]
@@ -17,6 +19,7 @@ class Dinosaur(Sprite):
         self.dino_jump = False
         self.jump_vel = self.JUMP_VEL
         self.dino_duck = False
+        self.dino_rect.y = self.Y_POS_DUCK
 
     def update(self, user_input):
         
@@ -64,8 +67,8 @@ class Dinosaur(Sprite):
 
     def duck(self):
         self.image = DUCKING[0] if self.step_index < 5 else DUCKING[1]
-        self.image = self.X_POS
-        self.image = self.Y_POS
+        self.dino_rect.x = self.X_POS
+        self.dino_rect.y = self.Y_POS_DUCK
         self.step_index += 1
 
     def draw(self, screen: pygame.Surface):

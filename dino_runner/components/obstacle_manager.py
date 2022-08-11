@@ -1,5 +1,5 @@
-from operator import and_
 import pygame
+
 from dino_runner.components.cactus import Cactus
 from dino_runner.utils.constants import ALL_CACTUS
 class ObstacleManager:
@@ -14,9 +14,13 @@ class ObstacleManager:
             if game.player.dino_rect.colliderect(obstacle.rect):
                 pygame.time.delay(1000)
                 game.playing = False
+                game.death_count += 1
                 break
 
     def draw(self, screen):
         for obstacle in self.obstacles:
             obstacle.draw(screen)
+
+    def reset_obstacles(self):
+        self.obstacles = []
 
