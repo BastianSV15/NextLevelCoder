@@ -1,7 +1,6 @@
 import pygame
 from pygame import mixer
 import random
-
 from .large_cactus import LargeCactus
 from .small_cactus import SmallCactus
 from .bird import Bird
@@ -12,14 +11,17 @@ class ObstacleManager:
         self.obstacles = []
 
     def update(self, game):
+
+        numeros = random.randint(0, 2)
         if len(self.obstacles) == 0:
-            if random.randint(0, 2) == 0:
+
+            if numeros == 0: 
                 self.obstacles.append(Bird(BIRD))
 
-            elif random.randint(0, 2) == 1:
+            elif numeros == 1:
                 self.obstacles.append(SmallCactus(SMALL_CACTUS))
 
-            elif random.randint(0, 2) == 2:
+            elif numeros == 2:
                 self.obstacles.append(LargeCactus(LARGE_CACTUS))
 
         for obstacle in self.obstacles:

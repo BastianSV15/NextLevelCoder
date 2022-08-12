@@ -3,11 +3,8 @@ from pygame import mixer
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacle_manager import ObstacleManager
 from dino_runner.components.power_up_manager import PowerUpManager
-
-from dino_runner.utils.constants import BG, ICON, RUNNING, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS
+from dino_runner.utils.constants import BG, ICON, RUNNING, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, GAME_OVER
 from dino_runner.utils.text_utils import draw_message_component
-
-
 FONT_STYLE = 'freesansbold.ttf'
 
 class Game:
@@ -28,10 +25,9 @@ class Game:
         self.power_up_manager = PowerUpManager()
         self.points = 0
         self.death_count = 0        
-        mixer.music.load("Game2.wav")
+        mixer.music.load("Game.wav")
         mixer.music.set_volume(0.1)
       
-
     def execute(self):
         self.running = True
         while self.running:
@@ -41,7 +37,6 @@ class Game:
         pygame.display.quit()
         pygame.quit()
         
-
     def run(self):
         # Game loop: events - update - draw
         mixer.music.play(-1)
@@ -77,13 +72,11 @@ class Game:
             mixer.music.play(1)
             mixer.music.set_volume(0.1)
       
-
     def show_deaths(self):
        
         if self.death_count %100 == 0:
             self.death_count += 1
             
-
     def draw(self):
         self.clock.tick(FPS)
         self.screen.fill((255, 255, 255))
@@ -96,7 +89,6 @@ class Game:
         pygame.display.update()
         pygame.display.flip()
         
-
     def draw_background(self):
         image_width = BG.get_width()
         self.screen.blit(BG, (self.x_pos_bg, self.y_pos_bg))
@@ -106,7 +98,6 @@ class Game:
             self.x_pos_bg = 0
         self.x_pos_bg -= self.game_speed
         
-
     def draw_score(self):
         draw_message_component(
             f"Points: {self.points}",
@@ -116,7 +107,6 @@ class Game:
             pos_y_center=50
         )
         
-
     def handle_key_events_on_menu(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -148,7 +138,6 @@ class Game:
                 pos_y_center=half_screen_heigth + 100
             )
             self.screen.blit(RUNNING[0], (half_screen_width -20, half_screen_heigth - 140))
-
         
         pygame.display.update()
         self.handle_key_events_on_menu()
