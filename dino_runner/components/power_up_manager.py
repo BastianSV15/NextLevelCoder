@@ -1,5 +1,6 @@
 import random
 import pygame
+from pygame import mixer
 
 from dino_runner.components.shield import Shield
 
@@ -26,7 +27,9 @@ class PowerUpManager:
                 time_random = random.randint(5, 8)
                 player.shield_time_up = power_up.start_time + (time_random * 1000)
                 self.power_ups.remove(power_up)
-
+                mixer.music.load("Power.wav")
+                mixer.music.play(1)
+                mixer.music.set_volume(0.1)
 
     def draw(self, screen):
         for power_up in self.power_ups:

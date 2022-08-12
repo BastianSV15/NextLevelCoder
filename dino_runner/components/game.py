@@ -1,10 +1,12 @@
 import pygame
+from pygame import mixer
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacle_manager import ObstacleManager
 from dino_runner.components.power_up_manager import PowerUpManager
 
 from dino_runner.utils.constants import BG, ICON, RUNNING, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS
 from dino_runner.utils.text_utils import draw_message_component
+
 
 FONT_STYLE = 'freesansbold.ttf'
 
@@ -24,22 +26,25 @@ class Game:
         self.player = Dinosaur()
         self.obstacle_manager = ObstacleManager()
         self.power_up_manager = PowerUpManager()
-
         self.points = 0
-        self.death_count = 0
-
+        self.death_count = 0        
+        mixer.music.load("Game2.wav")
+        mixer.music.set_volume(0.1)
+      
 
     def execute(self):
         self.running = True
         while self.running:
             if not self.playing:
                 self.show_menu()
-        
+                
         pygame.display.quit()
         pygame.quit()
+        
 
     def run(self):
         # Game loop: events - update - draw
+        mixer.music.play(-1)
         self.obstacle_manager.reset_obstacles()
         self.power_up_manager.reset_power_ups()
         self.playing = True
@@ -68,6 +73,10 @@ class Game:
         self.points += 1
         if self.points % 100 == 0:
             self.game_speed += 1
+            mixer.music.load("P100.wav")
+            mixer.music.play(1)
+            mixer.music.set_volume(0.1)
+      
 
     def show_deaths(self):
        
@@ -86,6 +95,7 @@ class Game:
         self.power_up_manager.draw(self.screen)
         pygame.display.update()
         pygame.display.flip()
+        
 
     def draw_background(self):
         image_width = BG.get_width()
@@ -95,6 +105,7 @@ class Game:
             self.screen.blit(BG, (image_width + self.x_pos_bg, self.y_pos_bg))
             self.x_pos_bg = 0
         self.x_pos_bg -= self.game_speed
+        
 
     def draw_score(self):
         draw_message_component(
@@ -118,7 +129,7 @@ class Game:
                 self.run()
 
     def show_menu(self):
-        self.screen.fill((255, 255, 255))
+        self.screen.fill((255, 0, 0))
         half_screen_heigth = SCREEN_HEIGHT // 2
         half_screen_width = SCREEN_WIDTH // 2
 

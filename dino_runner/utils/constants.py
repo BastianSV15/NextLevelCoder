@@ -45,12 +45,14 @@ DUCKING_HAMMER = [
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuck2.png")),
 ]
 
-ALL_CACTUS = [
+SMALL_CACTUS = [
     #SMALL CACTUS
     pygame.image.load(os.path.join(IMG_DIR, "Cactus/SmallCactus1.png")),
     pygame.image.load(os.path.join(IMG_DIR, "Cactus/SmallCactus2.png")),
     pygame.image.load(os.path.join(IMG_DIR, "Cactus/SmallCactus3.png")),
     #LARGE CACTUS
+]
+LARGE_CACTUS = [
     pygame.image.load(os.path.join(IMG_DIR, "Cactus/LargeCactus1.png")),
     pygame.image.load(os.path.join(IMG_DIR, "Cactus/LargeCactus2.png")),
     pygame.image.load(os.path.join(IMG_DIR, "Cactus/LargeCactus3.png")),
@@ -71,3 +73,4 @@ HEART = pygame.image.load(os.path.join(IMG_DIR, 'Other/SmallHeart.png'))
 
 DEFAULT_TYPE = "default"
 SHIELD_TYPE = "shield"
+

@@ -1,5 +1,5 @@
 import pygame
-
+from pygame import mixer
 from dino_runner.utils.constants import DEFAULT_TYPE, DUCKING_SHIELD, JUMPING_SHIELD, RUNNING, JUMPING, DUCKING, RUNNING_SHIELD, SHIELD_TYPE
 from pygame.sprite import Sprite
 
@@ -29,6 +29,7 @@ class Dinosaur(Sprite):
         self.dino_duck = False
         self.setup_state()
         
+        
     def setup_state(self):
         self.has_power_up = False
         self.shield = False
@@ -36,7 +37,6 @@ class Dinosaur(Sprite):
         self.shield_time_up = 0 
 
     def update(self, user_input):
-        
         if self.dino_run:
             self.run()
         elif self.dino_jump:
@@ -60,6 +60,7 @@ class Dinosaur(Sprite):
 
         if self.step_index >= 9:
             self.step_index = 0
+
 
     def run(self):
         self.image = RUN_IMG[self.type][self.step_index // 5]
